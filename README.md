@@ -106,7 +106,7 @@ The developer does NOT support using this tool for any malicious purposes and ke
 
 ---
 
-**By using SHADOW RAT, you confirm that you have read, understood, and agreed to all terms above. You confirm that your use will be legal, authorized, and follow this disclaimer.**
+**By using ShadowRAT, you confirm that you have read, understood, and agreed to all terms above. You confirm that your use will be legal, authorized, and follow this disclaimer.**
 
 ---
 
