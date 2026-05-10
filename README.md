@@ -283,3 +283,127 @@ python build_rat.py
 Select option `3` (Full rebuild). The EXE file will be in the `dist` folder as `SHADOW_RAT.exe`.
 
 You can copy this single EXE file to any Windows computer and run it without installing Python.
+
+
+## Bot Commands
+
+### Authentication
+| Command | Description |
+|---------|-------------|
+| `/start` | Connect to RAT |
+| `/help` | Show this help menu |
+
+### System Control
+| Command | Description |
+|---------|-------------|
+| `/addstartup` | Add to Windows startup |
+| `/deletestartup` | Remove from Windows startup |
+| `/run [path]` | Run a file |
+| `/sleep` | Put computer to sleep |
+| `/shutdown` | Shutdown computer |
+| `/restart` | Restart computer |
+| `/altf4` | Send Alt+F4 command |
+| `/cmdbomb` | Open 10 CMD windows |
+| `/block` | Block keyboard and mouse input |
+| `/unblock` | Unblock keyboard and mouse input |
+| `/disabletaskmgr` | Disable Task Manager |
+| `/enabletaskmgr` | Enable Task Manager |
+
+### Keylogger
+| Command | Description |
+|---------|-------------|
+| `/keylogstart` | Start keylogger |
+| `/keylogstop` | Stop keylogger |
+| `/keylogdump` | Download keylog file |
+
+### Surveillance
+| Command | Description |
+|---------|-------------|
+| `/screenshot` | Take screenshot |
+| `/mic [sec]` | Record microphone (default 5 sec) |
+| `/webscreen` | Take webcam photo |
+| `/webcam [sec]` | Record webcam video (default 5 sec) |
+| `/screenrecord [sec]` | Record screen (default 10 sec) |
+
+### Information Gathering
+| Command | Description |
+|---------|-------------|
+| `/users` | Show all PC users |
+| `/whoami` | Show current username |
+| `/tasklist` | Show running processes |
+| `/taskkill [name]` | Kill a process by name |
+| `/wifilist` | Show saved Wi-Fi networks |
+| `/wifipass [name]` | Show Wi-Fi password |
+| `/info` | Show IP address and location |
+| `/pcinfo` | Show detailed system info |
+| `/shortinfo` | Show basic system info |
+| `/apps` | Show installed applications |
+| `/batteryinfo` | Show battery status |
+
+### File Operations
+| Command | Description |
+|---------|-------------|
+| `/download [path]` | Download file from victim |
+| `/upload` | Upload file to victim |
+| `/metadata [path]` | Show file metadata |
+
+### Command Execution
+| Command | Description |
+|---------|-------------|
+| `/e [cmd]` | Execute command with output |
+| `/ex [cmd]` | Execute command (long output as file) |
+| `/execute` | Start interactive shell session |
+
+### Input Simulation
+| Command | Description |
+|---------|-------------|
+| `/keytype [text]` | Type text |
+| `/keypress [key]` | Press a single key |
+| `/keypresstwo k1 k2` | Press two keys together |
+| `/keypressthree k1 k2 k3` | Press three keys together |
+| `/mousemove x y` | Move mouse to coordinates |
+| `/mouseclick` | Left click at current position |
+| `/mouseright` | Right click at current position |
+| `/mousemesstart` | Start random mouse movement |
+| `/mousemesstop` | Stop random mouse movement |
+
+### Audio Control
+| Command | Description |
+|---------|-------------|
+| `/textspeech [text]` | Convert text to speech |
+| `/playsound [path]` | Play a sound file |
+| `/fullvolume` | Set volume to maximum |
+| `/volumeplus` | Increase volume by 10% |
+| `/volumeminus` | Decrease volume by 10% |
+
+### Window Control
+| Command | Description |
+|---------|-------------|
+| `/maximize` | Maximize active window |
+| `/minimize` | Minimize active window |
+
+### Clipboard
+| Command | Description |
+|---------|-------------|
+| `/clipboard` | Show clipboard contents |
+| `/changeclipboard [text]` | Change clipboard contents |
+
+### Browser
+| Command | Description |
+|---------|-------------|
+| `/chrome [url]` | Open URL in Chrome |
+| `/edge [url]` | Open URL in Edge |
+| `/firefox [url]` | Open URL in Firefox |
+
+### Obfuscation
+| Command | Description |
+|---------|-------------|
+| `/hide` | Hide script file |
+| `/unhide` | Unhide script file |
+
+### Other
+| Command | Description |
+|---------|-------------|
+| `/msg [type] [title] [text]` | Show message box (types: info, warning, error, question) |
+| `/wallpaper` | Change desktop wallpaper |
+| `/metadata [path]` | Show file metadata |
