@@ -194,17 +194,37 @@ The developer does NOT support using this tool for any malicious purposes and ke
 
 ## Installation
 
-### Prerequisites
-- Windows Operating System
-- Python 3.13 or higher
-- Telegram Bot Token (create via @BotFather)
+### What You Need Before Starting
 
-### Clone Repository
+- **Windows Computer** - This tool only works on Windows
+- **Python 3.13 or newer** - Download from python.org
+- **Telegram Bot Token** - Get it free from @BotFather on Telegram
+- **Internet Connection** - Required for bot communication
+
+### Get a Telegram Bot Token (Simple Steps)
+
+1. Open Telegram app on your phone or computer
+
+2. Search for `@BotFather`
+
+3. Send `/newbot` to BotFather
+
+4. Give your bot a name (example: `ShadowRAT`)
+
+5. Give your bot a username (must end with 'bot', example: `ShadowRAT_bot`)
+
+6. BotFather will give you a token (looks like: `7234567890:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw`)
+
+7. **Copy and save this token** - You will need it later
+
+### Clone This Repository
+
+Open Command Prompt and type:
 
 ```bash
 git clone https://github.com/s-r-e-e-r-a-j/ShadowRAT.git
 ```
-### Navigate to the ShadowRAT directory 
-```
+### Navigate to the ShadowRAT directory
+```bash
 cd ShadowRAT
 ```
