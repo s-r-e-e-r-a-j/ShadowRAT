@@ -423,7 +423,7 @@ You can copy this single EXE file to any Windows computer and run it without ins
 | `/wallpaper` | Change desktop wallpaper |
 
 
-## 📜 License
+## License
 
 **Custom Educational and Research License**
 
