@@ -234,7 +234,7 @@ cd ShadowRAT
 Copy and paste this command in Command Prompt:
 
 ```bash
-pip install pyautogui opencv-python pyttsx3 numpy pynput requests pytelegrambotapi pillow wave pyaudio 
+pip install pyautogui opencv-python pyttsx3 numpy pynput requests pytelegrambotapi pillow pyaudio 
 ```
 
 If PyAudio gives an error, try these commands instead:
