@@ -192,6 +192,8 @@ The developer does NOT support using this tool for any malicious purposes and ke
 ### Wallpaper
 - Change desktop wallpaper remotely
 
+---
+
 ## Installation
 
 ### What You Need Before Starting
@@ -263,7 +265,7 @@ PASSWORD: str = '1234567B'
 ```
 2. Change `1234567B` to your own secret password.
 
-### Run the Tool (Two Ways)
+### Run the ShadowRAT (Two Ways)
 
 **Way 1 - Run as Python Script:**
 ```bash
@@ -284,6 +286,7 @@ Select option `3` (Full rebuild). The EXE file will be in the `dist` folder as `
 
 You can copy this single EXE file to any Windows computer and run it without installing Python.
 
+---
 
 ## Bot Commands
 
