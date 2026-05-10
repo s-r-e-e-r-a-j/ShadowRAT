@@ -287,6 +287,18 @@ You can copy this single EXE file to any Windows computer and run it without ins
 
 ## Bot Commands
 
+### How to Use
+
+1. Open Telegram and search for your bot username (example: `@ShadowRAT_bot`)
+  
+2. Send `/start` to the bot
+
+3. Bot asks for password - send `1234567B` (or your custom password)
+  
+4. Bot replies: `SHADOW RAT Activated` and shows victim info
+
+5. Send any command from the list below
+
 ### Authentication
 | Command | Description |
 |---------|-------------|
