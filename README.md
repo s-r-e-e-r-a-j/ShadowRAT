@@ -202,6 +202,9 @@ The developer does NOT support using this tool for any malicious purposes and ke
 ### Clone Repository
 
 ```bash
-git clone https://github.com/s-r-e-e-r-a-j/SHADOW-RAT.git
-cd SHADOW-RAT
+git clone https://github.com/s-r-e-e-r-a-j/ShadowRAT.git
+```
+### Navigate to the ShadowRAT directory 
+```
+cd ShadowRAT
 ```
