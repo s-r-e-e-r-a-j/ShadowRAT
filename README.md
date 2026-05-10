@@ -421,3 +421,10 @@ You can copy this single EXE file to any Windows computer and run it without ins
 |---------|-------------|
 | `/msg [type] [title] [text]` | Show message box (types: info, warning, error, question) |
 | `/wallpaper` | Change desktop wallpaper |
+
+
+## 📜 License
+
+**Custom Educational and Research License**
+
+Copyright © 2026 Sreeraj S Kurup. All rights reserved.
