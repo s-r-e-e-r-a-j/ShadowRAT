@@ -1,6 +1,6 @@
 ## Custom License - Educational & Research Use Only
 
-### SHADOW RAT Software License Agreement
+### ShadowRAT Software License Agreement
 
 **Version 1.0, May 10, 2026**
 
