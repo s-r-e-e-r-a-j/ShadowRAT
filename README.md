@@ -110,20 +110,6 @@ The developer does NOT support using this tool for any malicious purposes and ke
 
 ---
 
-## Antivirus Will Likely Detect This Project
-
-**ShadowRAT is made only for security research, authorized penetration testing, and cybersecurity learning in safe and authorized environments.**
-
-This project is not made to be stealthy or to bypass antivirus detection. It does not use advanced hiding, obfuscation, packing, or antivirus evasion methods.
-
-Because of this, Microsoft Defender and other antivirus programs may easily detect or flag this project using signatures and behavior analysis.
-
-The purpose of this repository is learning, testing, and security research. The code is openly readable and not intended for real-world malicious use.
-
-Use this project only on systems you own or have permission to test.
-
----
-
 ## Features
 
 ### Authentication
