@@ -116,50 +116,67 @@ The developer does NOT support using this tool for any malicious purposes and ke
 - Password-protected access
 - Session-based user authentication
 
+### System Control
+- Remote shutdown, restart, sleep, hibernate, lock, logoff
+- Input blocking/unblocking
+- Task Manager enable/disable
+- Windows startup persistence (manual and automatic)
+- Alt+F4 simulation
+- CMD flood (10 windows)
+
+### Persistence
+- Automatic registry-based persistence (/persistence)
+- Remove persistence (/nopersistence)
+
 ### Keylogger
 - Real-time keystroke logging
 - Captures all keyboard input including special keys
 - Automatic log buffering and saving
-
-### System Control
-- Remote shutdown, restart, and sleep
-- Input blocking/unblocking
-- Task Manager enable/disable
-- Windows startup persistence
-- Alt+F4 simulation
-- CMD flood (10 windows)
+- Screenshot capture on each key press (/keylogscreenshot)
 
 ### Surveillance
 - Live screenshot capture
-- Screen recording
+- Screen recording (customizable duration)
 - Webcam photo capture
-- Webcam video recording
+- Webcam video recording (customizable duration)
 - Microphone audio recording
+
+### Advanced Monitoring
+- Clipboard monitoring (real-time with logging)
+- USB device monitoring (insertion/removal tracking)
+- Network connection monitoring (high activity alerts)
 
 ### Information Gathering
 - Wi-Fi network list and password extraction
-- System information (OS, CPU, RAM)
-- Process list and process killing
+- Complete system information (CPU, RAM, disk, battery, uptime)
+- Process list with CPU/RAM usage
+- Kill process by name or PID
 - User account enumeration
 - Installed applications list
 - Battery status
 - IP address and geolocation
+- Active network connections
 
 ### File Operations
-- Upload files to target machine
+- Directory browsing and navigation
+- Upload files to target machine (via Telegram)
 - Download files from target machine
+- Download files from internet directly
 - Execute files remotely
+- Create/extract zip archives
+- Delete, rename, create, remove files/folders
+- Global file search on C drive
 - File metadata viewing
 
 ### Remote Command Execution
 - Single command execution with output
-- Batch command execution with long output
-- Interactive shell session
-- Directory navigation (cd)
+- Batch command execution with long output as file
+- Interactive shell session with history
+- Directory navigation (cd, cd..)
 
 ### Input Simulation
 - Keyboard typing simulation
-- Single, dual, and triple keypress
+- Single, dual, and triple keypress combinations
 - Mouse movement to coordinates
 - Mouse left/right click
 - Random mouse movement (Mouse Mess)
@@ -170,9 +187,10 @@ The developer does NOT support using this tool for any malicious purposes and ke
 - Open URLs in Firefox
 
 ### Audio/Visual
-- Text-to-speech
+- Text-to-speech (/textspeech)
+- Text-to-speech alias (/say)
 - Sound file playback
-- Volume control (max, +10, -10)
+- Volume control (max, +10, -10, set specific level, mute, unmute)
 
 ### Window Management
 - Maximize active window
@@ -181,16 +199,32 @@ The developer does NOT support using this tool for any malicious purposes and ke
 ### Clipboard
 - Read clipboard contents
 - Write to clipboard
+- Real-time clipboard monitoring
+
+### Security & Passwords
+- Chrome saved passwords extraction
+- Wi-Fi password extraction
+
+### Messaging
+- Custom message box with types (info, warning, error, question)
+- Windows native notifications
+
+### Scheduling
+- Schedule commands for future execution (seconds-based)
+- List scheduled tasks
+- Clear all scheduled tasks
 
 ### Obfuscation
-- Hide script file
+- Hide script file (Windows hidden attribute)
 - Unhide script file
-
-### MessageBox
-- Custom message box with different types (info, warning, error, question)
 
 ### Wallpaper
 - Change desktop wallpaper remotely
+
+### Information
+- IP address and geolocation
+- System uptime
+- Basic and detailed system info
 
 ---
 
