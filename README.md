@@ -202,7 +202,7 @@ The developer does NOT support using this tool for any malicious purposes and ke
 - Real-time clipboard monitoring
 
 ### Security & Passwords
-- Chrome saved passwords extraction
+- Chrome login data extraction (URLs and usernames)
 - Wi-Fi password extraction
 
 ### Messaging
