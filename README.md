@@ -437,7 +437,7 @@ You can copy this single EXE file to any Windows computer and run it without ins
 |---------|-------------|
 | `/wifilist` | Show saved Wi-Fi networks |
 | `/wifipass [name]` | Show Wi-Fi password |
-| `/passwords` | Extract saved browser passwords (Chrome) |
+| `/passwords` | Chrome login data extraction (URLs and usernames) |
 | `/chrome [url]` | Open URL in Chrome |
 | `/edge [url]` | Open URL in Edge |
 | `/firefox [url]` | Open URL in Firefox |
