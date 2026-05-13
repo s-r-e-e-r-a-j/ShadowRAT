@@ -309,11 +309,6 @@ COMMAND LIST:
 /clearschedules - Clear all scheduled tasks
 /wallpaper - Change desktop wallpaper
 /cmdbomb - Open 10 CMD windows
-/lockpc	- Lock computer
-/logoff	- Log off current user
-/hibernate - Hibernate computer
-/mute - Mute system audio
-/unmute	- Unmute system audio
 """
     bot.send_message(message.chat.id, help_text)
 
