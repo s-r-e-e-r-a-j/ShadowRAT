@@ -349,8 +349,6 @@ You can copy this single EXE file to any Windows computer and run it without ins
 | `/deletestartup` | Remove from Windows startup |
 | `/persistence` | Enable auto-start on boot (automatic) |
 | `/nopersistence` | Disable auto-start on boot |
-| `/hide` | Hide script file |
-| `/unhide` | Unhide script file |
 | `/run [path]` | Run a file |
 | `/sleep` | Put computer to sleep |
 | `/shutdown` | Shutdown computer |
@@ -514,7 +512,7 @@ You can copy this single EXE file to any Windows computer and run it without ins
 | Category | Number of Commands |
 |----------|-------------------|
 | Authentication | 2 |
-| System Control | 19 |
+| System Control | 17 |
 | System Information | 9 |
 | File Management | 14 |
 | Process Management | 4 |
@@ -530,7 +528,7 @@ You can copy this single EXE file to any Windows computer and run it without ins
 | Scheduling | 3 |
 | Obfuscation | 2 |
 | Other | 1 |
-| **TOTAL** | **106** |
+| **TOTAL** | **101** |
 
 ---
 
