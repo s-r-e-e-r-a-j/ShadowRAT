@@ -472,7 +472,6 @@ You can copy this single EXE file to any Windows computer and run it without ins
 | Command | Description |
 |---------|-------------|
 | `/wallpaper` | Change desktop wallpaper (use with /upload first) |
-| `/msg [type] [title] [text]` | Show message box |
 
 ---
 
@@ -496,8 +495,8 @@ You can copy this single EXE file to any Windows computer and run it without ins
 | Messaging | 2 |
 | Scheduling | 3 |
 | Obfuscation | 2 |
-| Other | 2 |
-| **TOTAL** | **107** |
+| Other | 1 |
+| **TOTAL** | **106** |
 
 ---
 
