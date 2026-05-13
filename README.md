@@ -515,13 +515,13 @@ You can copy this single EXE file to any Windows computer and run it without ins
 |----------|-------------------|
 | Authentication | 2 |
 | System Control | 19 |
-| System Information | 10 |
+| System Information | 9 |
 | File Management | 14 |
 | Process Management | 4 |
 | Keylogger | 4 |
-| Surveillance | 6 |
+| Surveillance | 5 |
 | Monitoring | 9 |
-| Network & Wi-Fi | 7 |
+| Network & Wi-Fi | 6 |
 | Input Control | 9 |
 | Audio Control | 9 |
 | Window Control | 2 |
