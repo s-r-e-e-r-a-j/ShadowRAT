@@ -521,7 +521,7 @@ You can copy this single EXE file to any Windows computer and run it without ins
 | Keylogger | 4 |
 | Surveillance | 5 |
 | Monitoring | 9 |
-| Network & Wi-Fi | 6 |
+| Network & Wi-Fi | 7 |
 | Input Control | 9 |
 | Audio Control | 9 |
 | Window Control | 2 |
@@ -530,7 +530,7 @@ You can copy this single EXE file to any Windows computer and run it without ins
 | Scheduling | 3 |
 | Obfuscation | 2 |
 | Other | 1 |
-| **TOTAL** | **101** |
+| **TOTAL** | **102** |
 
 ---
 
