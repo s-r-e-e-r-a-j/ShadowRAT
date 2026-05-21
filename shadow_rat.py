@@ -1562,6 +1562,14 @@ def clear_schedules(message: telebot.types.Message) -> None:
     
     bot.send_message(message.chat.id, f"Cancelled {count} scheduled commands")
 
+def run_bot() -> None:
+    while True:
+        try:
+            bot.polling(none_stop=True, interval=1, timeout=30)
+        except KeyboardInterrupt:
+            continue
+        except:
+            time.sleep(10)
 
 if __name__ == '__main__':
-    bot.polling(none_stop=True)
+    run_bot()
