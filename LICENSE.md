@@ -2,7 +2,7 @@
 
 ### ShadowRAT Software License Agreement
 
-**Version 2.1.1, May 14, 2026**
+**Version 2.1.1, May 21, 2026**
 
 ### 1. Acceptance
 By downloading, installing, copying, or using this software, you agree to follow all rules in this license. If you do not agree, do not use this software.
